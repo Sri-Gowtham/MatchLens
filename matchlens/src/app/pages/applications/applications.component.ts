@@ -144,28 +144,9 @@ export class ApplicationsComponent implements OnInit {
 
     forkJoin({
       apps: this.api.getApplications(studentId),
-      listings: this.api.getAllListings()
+      matched: this.api.getMatchedListings(studentId, {})
     }).subscribe({
-      next: ({ apps, listings }) => {
-        const joined: AppCardData[] = apps.map(app => {
-          // If using the mock json-server, getAllListings() might just return raw.
-          // Since getMatchedListings actually does the score matching we should ideally use that,
-          // but if we just want raw we can use getMatchedListings to get scores.
-          // Actually let's use getMatchedListings so we have the computed score.
-          return {
-            application: app,
-            listing: listings.find(l => l.listingId === app.listingId)!
-          };
-        }).filter(d => d.listing != null); // filter out if listing not found
-
-        this.joinedData.set(joined);
-      }
-    });
-
-    // Actually, to get the correct scores, we should use getMatchedListings instead of getAllListings
-    // Let's swap that out cleanly
-    this.api.getMatchedListings(studentId, {}).subscribe(matched => {
-      this.api.getApplications(studentId).subscribe(apps => {
+      next: ({ apps, matched }) => {
         const joined: AppCardData[] = apps.map(app => ({
           application: app,
           listing: matched.find(l => l.listingId === app.listingId)!
@@ -173,7 +154,11 @@ export class ApplicationsComponent implements OnInit {
 
         this.joinedData.set(joined);
         this.loading.set(false);
-      });
+      },
+      error: (err) => {
+        console.error(`[Applications] Failed to load data — HTTP ${err.status}: ${err.message}`);
+        this.loading.set(false);
+      }
     });
   }
 

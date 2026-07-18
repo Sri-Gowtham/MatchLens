@@ -83,13 +83,56 @@
       }
     },
     {
-      "id": "student-1784361102035",
-      "name": "Sri",
-      "email": "srigowtham289@gmail.com",
-      "skills": [],
-      "gpa": 0,
-      "workAuthStatus": "us_citizen",
-      "resumeLink": ""
+      "name": "Sri Gowtham",
+      "phone": "9876543210",
+      "country": "India",
+      "city": "Coimbatore",
+      "address": "123 Market Street, Apt 4B",
+      "about": "I am Sri Gowtham, a diligent tech enthusiast and a Computer Science and Engineering student at SNS College of Technology, Coimbatore. I am passionate about web development and enjoy building practical, user-friendly applications. Through projects like Vintage Verse, Freshify, and my internships at TechSnapie Solutions and Epoch Minds, I have gained hands-on experience in web development and Python with Machine Learning. I am a continuous learner who actively participates in hackathons, coding challenges, and technical events. My goal is to build innovative software solutions while continuously enhancing my technical and problem-solving skills.",
+      "workAuthStatus": "CITIZEN",
+      "skills": [
+        "Python",
+        "TypeScript",
+        "Java",
+        "NLP"
+      ],
+      "education": {
+        "degree": {
+          "institution": "University of California, Berkeley",
+          "degreeName": "Bachelor's",
+          "branch": "Computer Science and Engineering",
+          "graduationMonth": "April",
+          "graduationYear": "2027",
+          "cgpa": 8.35
+        },
+        "hsc": {
+          "schoolName": "xyz Higher Secondary School",
+          "percentage": 85,
+          "passoutYear": 2023
+        },
+        "ssc": {
+          "schoolName": "xyz Higher Secondary School",
+          "percentage": 90,
+          "passoutYear": 2021
+        }
+      },
+      "experience": [
+        {
+          "id": "exp-1784363601829-0",
+          "company": "Databricks",
+          "role": "Software Engineering Intern",
+          "startDate": "2025-03",
+          "endDate": "2025-11",
+          "current": false
+        }
+      ],
+      "links": {
+        "resumeUrl": null,
+        "linkedin": "",
+        "github": "",
+        "others": []
+      },
+      "id": "student-1784361102035"
     }
   ],
   "matchedListings": [

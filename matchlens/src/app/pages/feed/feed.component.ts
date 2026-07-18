@@ -1,5 +1,6 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { forkJoin } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { ApiService } from '../../core/services/api.service';
 import { AuthService } from '../../core/services/auth.service';
@@ -83,9 +84,8 @@ import { RouterLink } from '@angular/router';
                       d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
               </svg>
               <p class="text-text-secondary font-sans text-sm">
-                Couldn't load listings. Make sure the mock server is running.
+                Couldn't load listings right now. Please try again.
               </p>
-              <p class="text-xs text-text-secondary font-mono mt-2">npm run mock</p>
               <button (click)="reload()" class="btn-secondary mt-5 mx-auto">Try again</button>
             </div>
           }
@@ -169,7 +169,8 @@ export class FeedComponent implements OnInit {
         this.applyFilters();
         this.loading.set(false);
       },
-      error: () => {
+      error: (err: HttpErrorResponse) => {
+        console.error(`[Feed] Failed to load listings — HTTP ${err.status}: ${err.message}`);
         this.error.set(true);
         this.loading.set(false);
       }
