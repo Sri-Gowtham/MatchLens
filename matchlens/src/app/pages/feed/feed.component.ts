@@ -1,14 +1,10 @@
 import { Component, OnInit, signal } from '@angular/core';
-import { forkJoin } from 'rxjs';
-import { HttpErrorResponse } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-import { ApiService } from '../../core/services/api.service';
-import { AuthService } from '../../core/services/auth.service';
 import { MatchedListing, ListingFilters } from '../../core/models/listing.model';
-import { Application } from '../../core/models/application.model';
 import { FilterBarComponent } from './components/filter-bar/filter-bar.component';
 import { ListingCardComponent } from './components/listing-card/listing-card.component';
 import { RouterLink } from '@angular/router';
+import { MOCK_LISTINGS } from '../../core/mock/mock-data';
 
 @Component({
   selector: 'app-feed',
@@ -145,88 +141,47 @@ import { RouterLink } from '@angular/router';
 export class FeedComponent implements OnInit {
   allListings = signal<MatchedListing[]>([]);
   filteredListings = signal<MatchedListing[]>([]);
-  applications = signal<Application[]>([]);
-  loading = signal(true);
+  loading = signal(false);
   error = signal(false);
   private activeFilters: ListingFilters = {};
+  // Local saved/applied state for demo (no API)
+  private savedIds = signal<Set<string>>(new Set());
+  private appliedIds = signal<Set<string>>(new Set());
 
-  constructor(private api: ApiService, public auth: AuthService) {}
-
-  ngOnInit() { this.reload(); }
-
-  reload() {
-    const id = this.auth.getStudentId() ?? '';
-    this.loading.set(true);
-    this.error.set(false);
-
-    forkJoin({
-      listings: this.api.getAllListings(),
-      apps: this.api.getApplications(id)
-    }).subscribe({
-      next: (res) => {
-        this.allListings.set(res.listings);
-        this.applications.set(res.apps);
-        this.applyFilters();
-        this.loading.set(false);
-      },
-      error: (err: HttpErrorResponse) => {
-        console.error(
-          `[Feed] Failed to load listings — HTTP ${err.status}`,
-          err.message,
-          err.error
-        );
-        this.error.set(true);
-        this.loading.set(false);
-      }
-    });
+  ngOnInit() {
+    const sorted = [...MOCK_LISTINGS].sort((a, b) => b.score - a.score);
+    this.allListings.set(sorted);
+    this.applyFilters();
   }
 
-  getApplication(listingId: string): Application | undefined {
-    return this.applications().find(a => a.listingId === listingId);
+  reload() {
+    this.ngOnInit();
+  }
+
+  getApplication(listingId: string) {
+    if (this.appliedIds().has(listingId)) {
+      return { listingId, status: 'APPLIED' as const, id: listingId, studentId: 'demo', updatedAt: new Date().toISOString() };
+    }
+    if (this.savedIds().has(listingId)) {
+      return { listingId, status: 'SAVED' as const, id: listingId, studentId: 'demo', updatedAt: new Date().toISOString() };
+    }
+    return undefined;
   }
 
   handleSave(listingId: string) {
-    const studentId = this.auth.getStudentId();
-    if (!studentId) return;
-
-    const existing = this.getApplication(listingId);
-    if (existing) {
-      if (existing.status !== 'SAVED') return;
-      // Already saved, do nothing or unsave if we had that feature
-    } else {
-      this.api.createApplication({
-        studentId,
-        listingId,
-        status: 'SAVED',
-        updatedAt: new Date().toISOString()
-      }).subscribe(app => {
-        this.applications.set([...this.applications(), app]);
-      });
-    }
+    if (this.appliedIds().has(listingId)) return;
+    const s = new Set(this.savedIds());
+    s.add(listingId);
+    this.savedIds.set(s);
   }
 
   handleApply(listingId: string) {
-    const studentId = this.auth.getStudentId();
-    if (!studentId) return;
-
-    const existing = this.getApplication(listingId);
-    if (existing) {
-      this.api.updateApplication(existing.id!, {
-        status: 'APPLIED',
-        updatedAt: new Date().toISOString()
-      }).subscribe(app => {
-        this.applications.set(this.applications().map(a => a.id === app.id ? app : a));
-      });
-    } else {
-      this.api.createApplication({
-        studentId,
-        listingId,
-        status: 'APPLIED',
-        updatedAt: new Date().toISOString()
-      }).subscribe(app => {
-        this.applications.set([...this.applications(), app]);
-      });
-    }
+    const saved = new Set(this.savedIds());
+    saved.delete(listingId);
+    this.savedIds.set(saved);
+    const applied = new Set(this.appliedIds());
+    applied.add(listingId);
+    this.appliedIds.set(applied);
   }
 
   onFiltersChanged(filters: ListingFilters) {

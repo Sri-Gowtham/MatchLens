@@ -1,15 +1,13 @@
-import { Component, OnInit, signal, computed, inject } from '@angular/core';
+import { Component, OnInit, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ApiService } from '../../core/services/api.service';
-import { AuthService } from '../../core/services/auth.service';
 import { MatchedListing } from '../../core/models/listing.model';
-import { Application, ApplicationStatus } from '../../core/models/application.model';
+import { ApplicationStatus } from '../../core/models/application.model';
 import { ScoreBadgeComponent } from '../../shared/score-badge/score-badge.component';
-import { forkJoin } from 'rxjs';
+import { MOCK_APPLICATIONS } from '../../core/mock/mock-data';
 
 interface AppCardData {
-  application: Application;
+  application: { id: string; studentId: string; listingId: string; status: ApplicationStatus; updatedAt: string };
   listing: MatchedListing;
 }
 
@@ -27,64 +25,56 @@ interface AppCardData {
         </p>
       </div>
 
-      @if (loading()) {
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 animate-pulse">
-          @for (i of [1,2,3]; track i) {
-            <div class="h-96 bg-surface border border-border rounded-2xl"></div>
-          }
-        </div>
-      } @else {
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
-          
-          <!-- SAVED COLUMN -->
-          <div class="bg-surface/50 rounded-2xl p-4 border border-border/50">
-            <div class="flex items-center justify-between mb-4 px-1">
-              <h3 class="font-serif font-semibold text-primary">Saved</h3>
-              <span class="w-6 h-6 rounded-full bg-border text-xs font-sans font-medium flex items-center justify-center">{{ savedList().length }}</span>
-            </div>
-            <div class="space-y-3">
-              @for (item of savedList(); track item.application.id) {
-                <ng-container *ngTemplateOutlet="cardTemplate; context: { $implicit: item }"></ng-container>
-              }
-              @if (savedList().length === 0) {
-                <p class="text-xs text-text-secondary font-sans text-center py-4">No saved listings.</p>
-              }
-            </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
+        
+        <!-- SAVED COLUMN -->
+        <div class="bg-surface/50 rounded-2xl p-4 border border-border/50">
+          <div class="flex items-center justify-between mb-4 px-1">
+            <h3 class="font-serif font-semibold text-primary">Saved</h3>
+            <span class="w-6 h-6 rounded-full bg-border text-xs font-sans font-medium flex items-center justify-center">{{ savedList().length }}</span>
           </div>
-
-          <!-- APPLIED COLUMN -->
-          <div class="bg-surface/50 rounded-2xl p-4 border border-border/50">
-            <div class="flex items-center justify-between mb-4 px-1">
-              <h3 class="font-serif font-semibold text-primary">Applied</h3>
-              <span class="w-6 h-6 rounded-full bg-border text-xs font-sans font-medium flex items-center justify-center">{{ appliedList().length }}</span>
-            </div>
-            <div class="space-y-3">
-              @for (item of appliedList(); track item.application.id) {
-                <ng-container *ngTemplateOutlet="cardTemplate; context: { $implicit: item }"></ng-container>
-              }
-              @if (appliedList().length === 0) {
-                <p class="text-xs text-text-secondary font-sans text-center py-4">No applied listings.</p>
-              }
-            </div>
-          </div>
-
-          <!-- IN REVIEW COLUMN -->
-          <div class="bg-surface/50 rounded-2xl p-4 border border-border/50">
-            <div class="flex items-center justify-between mb-4 px-1">
-              <h3 class="font-serif font-semibold text-primary">In Review</h3>
-              <span class="w-6 h-6 rounded-full bg-border text-xs font-sans font-medium flex items-center justify-center">{{ inReviewList().length }}</span>
-            </div>
-            <div class="space-y-3">
-              @for (item of inReviewList(); track item.application.id) {
-                <ng-container *ngTemplateOutlet="cardTemplate; context: { $implicit: item }"></ng-container>
-              }
-              @if (inReviewList().length === 0) {
-                <p class="text-xs text-text-secondary font-sans text-center py-4">No listings in review.</p>
-              }
-            </div>
+          <div class="space-y-3">
+            @for (item of savedList(); track item.application.id) {
+              <ng-container *ngTemplateOutlet="cardTemplate; context: { $implicit: item }"></ng-container>
+            }
+            @if (savedList().length === 0) {
+              <p class="text-xs text-text-secondary font-sans text-center py-4">No saved listings.</p>
+            }
           </div>
         </div>
-      }
+
+        <!-- APPLIED COLUMN -->
+        <div class="bg-surface/50 rounded-2xl p-4 border border-border/50">
+          <div class="flex items-center justify-between mb-4 px-1">
+            <h3 class="font-serif font-semibold text-primary">Applied</h3>
+            <span class="w-6 h-6 rounded-full bg-border text-xs font-sans font-medium flex items-center justify-center">{{ appliedList().length }}</span>
+          </div>
+          <div class="space-y-3">
+            @for (item of appliedList(); track item.application.id) {
+              <ng-container *ngTemplateOutlet="cardTemplate; context: { $implicit: item }"></ng-container>
+            }
+            @if (appliedList().length === 0) {
+              <p class="text-xs text-text-secondary font-sans text-center py-4">No applied listings.</p>
+            }
+          </div>
+        </div>
+
+        <!-- IN REVIEW COLUMN -->
+        <div class="bg-surface/50 rounded-2xl p-4 border border-border/50">
+          <div class="flex items-center justify-between mb-4 px-1">
+            <h3 class="font-serif font-semibold text-primary">In Review</h3>
+            <span class="w-6 h-6 rounded-full bg-border text-xs font-sans font-medium flex items-center justify-center">{{ inReviewList().length }}</span>
+          </div>
+          <div class="space-y-3">
+            @for (item of inReviewList(); track item.application.id) {
+              <ng-container *ngTemplateOutlet="cardTemplate; context: { $implicit: item }"></ng-container>
+            }
+            @if (inReviewList().length === 0) {
+              <p class="text-xs text-text-secondary font-sans text-center py-4">No listings in review.</p>
+            }
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Reusable Card Template -->
@@ -125,62 +115,27 @@ interface AppCardData {
   `
 })
 export class ApplicationsComponent implements OnInit {
-  private api = inject(ApiService);
-  private authSvc = inject(AuthService);
-
-  loading = signal(true);
   joinedData = signal<AppCardData[]>([]);
 
-  savedList = computed(() => this.joinedData().filter(d => d.application.status === 'SAVED'));
-  appliedList = computed(() => this.joinedData().filter(d => d.application.status === 'APPLIED'));
+  savedList    = computed(() => this.joinedData().filter(d => d.application.status === 'SAVED'));
+  appliedList  = computed(() => this.joinedData().filter(d => d.application.status === 'APPLIED'));
   inReviewList = computed(() => this.joinedData().filter(d => d.application.status === 'IN_REVIEW'));
 
   ngOnInit() {
-    const studentId = this.authSvc.getStudentId();
-    if (!studentId) {
-      this.loading.set(false);
-      return;
-    }
-
-    forkJoin({
-      apps: this.api.getApplications(studentId),
-      matched: this.api.getMatchedListings(studentId, {})
-    }).subscribe({
-      next: ({ apps, matched }) => {
-        const joined: AppCardData[] = apps.map(app => ({
-          application: app,
-          listing: matched.find(l => l.listingId === app.listingId)!
-        })).filter(d => d.listing != null);
-
-        this.joinedData.set(joined);
-        this.loading.set(false);
-      },
-      error: (err) => {
-        console.error(`[Applications] Failed to load data — HTTP ${err.status}: ${err.message}`);
-        this.loading.set(false);
-      }
-    });
+    // Deep-copy so status mutations don't mutate the original constant
+    const data: AppCardData[] = MOCK_APPLICATIONS.map(m => ({
+      application: { ...m.application },
+      listing: m.listing
+    }));
+    this.joinedData.set(data);
   }
 
   updateStatus(item: AppCardData, newStatus: ApplicationStatus) {
-    if (item.application.status === newStatus || !item.application.id) return;
-    
-    // Optimistic UI update
-    const previousStatus = item.application.status;
+    if (item.application.status === newStatus) return;
     item.application.status = newStatus;
     item.application.updatedAt = new Date().toISOString();
+    // Trigger signal update by spreading
     this.joinedData.set([...this.joinedData()]);
-
-    this.api.updateApplication(item.application.id, { 
-      status: newStatus,
-      updatedAt: item.application.updatedAt
-    }).subscribe({
-      error: () => {
-        // Revert on error
-        item.application.status = previousStatus;
-        this.joinedData.set([...this.joinedData()]);
-      }
-    });
   }
 
   getCompanyColor(companyName: string): string {
@@ -189,3 +144,4 @@ export class ApplicationsComponent implements OnInit {
     return colors[idx];
   }
 }
+
