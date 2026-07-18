@@ -25,6 +25,7 @@ export interface DegreeEducation {
 export interface SchoolEducation {
   schoolName: string;
   percentage: number; // 0–100
+  passoutYear: number;
 }
 
 export interface StudentEducation {

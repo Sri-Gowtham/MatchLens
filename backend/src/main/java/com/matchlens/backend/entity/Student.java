@@ -84,6 +84,7 @@ public class Student {
     public static class Hsc {
         private String schoolName;
         private Double percentage;
+        private Integer passoutYear;
     }
 
     @Data
@@ -92,6 +93,7 @@ public class Student {
     public static class Ssc {
         private String schoolName;
         private Double percentage;
+        private Integer passoutYear;
     }
 
     @Data

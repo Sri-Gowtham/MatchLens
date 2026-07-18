@@ -409,7 +409,7 @@ function urlPatternValidator(control: AbstractControl) {
 
             <!-- HSC sub-section -->
             <div class="mb-5 pb-5 border-b border-border" formGroupName="hsc">
-              <p class="text-sm font-semibold text-primary font-sans mb-3">12th / HSC</p>
+              <p class="text-sm font-semibold text-primary font-sans mb-3">Add class 12 Details</p>
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div class="form-group">
                   <label for="hsc-school" class="form-label">School Name</label>
@@ -424,12 +424,20 @@ function urlPatternValidator(control: AbstractControl) {
                     <p class="form-error">Percentage must be 0–100.</p>
                   }
                 </div>
+                <div class="form-group">
+                  <label for="hsc-passout" class="form-label">Passout Year <span class="text-danger">*</span></label>
+                  <input id="hsc-passout" formControlName="passoutYear" type="number"
+                         class="form-input" placeholder="2020" min="1990" [max]="currentYear">
+                  @if (hscGrp.get('passoutYear')?.invalid && hscGrp.get('passoutYear')?.touched) {
+                    <p class="form-error">Valid passout year is required.</p>
+                  }
+                </div>
               </div>
             </div>
 
             <!-- SSC sub-section -->
             <div formGroupName="ssc">
-              <p class="text-sm font-semibold text-primary font-sans mb-3">10th / SSC</p>
+              <p class="text-sm font-semibold text-primary font-sans mb-3">Add class 10 details</p>
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div class="form-group">
                   <label for="ssc-school" class="form-label">School Name</label>
@@ -442,6 +450,14 @@ function urlPatternValidator(control: AbstractControl) {
                          class="form-input" placeholder="97" min="0" max="100" step="0.1">
                   @if (sscGrp.get('percentage')?.invalid && sscGrp.get('percentage')?.touched) {
                     <p class="form-error">Percentage must be 0–100.</p>
+                  }
+                </div>
+                <div class="form-group">
+                  <label for="ssc-passout" class="form-label">Passout Year <span class="text-danger">*</span></label>
+                  <input id="ssc-passout" formControlName="passoutYear" type="number"
+                         class="form-input" placeholder="2018" min="1990" [max]="currentYear">
+                  @if (sscGrp.get('passoutYear')?.invalid && sscGrp.get('passoutYear')?.touched) {
+                    <p class="form-error">Valid passout year is required.</p>
                   }
                 </div>
               </div>
@@ -696,6 +712,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   gradYears = GRAD_YEARS;
   expYears  = EXP_YEARS;
   expMonths = EXP_MONTHS;
+  currentYear = new Date().getFullYear();
 
   workAuthOptions = (Object.entries(WORK_AUTH_LABELS) as [WorkAuthStatus, string][])
     .map(([value, label]) => ({ value, label }));
@@ -765,11 +782,13 @@ export class ProfileComponent implements OnInit, OnDestroy {
       }),
       hsc: this.fb.group({
         schoolName:  [''],
-        percentage:  [null as number | null, [Validators.min(0), Validators.max(100)]]
+        percentage:  [null as number | null, [Validators.min(0), Validators.max(100)]],
+        passoutYear: [null as number | null, [Validators.required, Validators.min(1990), Validators.max(new Date().getFullYear())]]
       }),
       ssc: this.fb.group({
         schoolName:  [''],
-        percentage:  [null as number | null, [Validators.min(0), Validators.max(100)]]
+        percentage:  [null as number | null, [Validators.min(0), Validators.max(100)]],
+        passoutYear: [null as number | null, [Validators.required, Validators.min(1990), Validators.max(new Date().getFullYear())]]
       })
     }),
 
@@ -836,10 +855,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
       });
     }
     if (s.education?.hsc) {
-      this.hscGrp.patchValue({ schoolName: s.education.hsc.schoolName ?? '', percentage: s.education.hsc.percentage ?? null });
+      this.hscGrp.patchValue({ schoolName: s.education.hsc.schoolName ?? '', percentage: s.education.hsc.percentage ?? null, passoutYear: s.education.hsc.passoutYear ?? null });
     }
     if (s.education?.ssc) {
-      this.sscGrp.patchValue({ schoolName: s.education.ssc.schoolName ?? '', percentage: s.education.ssc.percentage ?? null });
+      this.sscGrp.patchValue({ schoolName: s.education.ssc.schoolName ?? '', percentage: s.education.ssc.percentage ?? null, passoutYear: s.education.ssc.passoutYear ?? null });
     }
 
     // Experience FormArray
@@ -963,10 +982,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
     ];
     const degFilled = degFields.filter(f => f !== null && f !== undefined && String(f).trim()).length;
 
-    const hscFields = [v.education?.hsc?.schoolName, v.education?.hsc?.percentage];
+    const hscFields = [v.education?.hsc?.schoolName, v.education?.hsc?.percentage, v.education?.hsc?.passoutYear];
     const hscFilled = hscFields.filter(f => f !== null && f !== undefined && String(f).trim()).length;
 
-    const sscFields = [v.education?.ssc?.schoolName, v.education?.ssc?.percentage];
+    const sscFields = [v.education?.ssc?.schoolName, v.education?.ssc?.percentage, v.education?.ssc?.passoutYear];
     const sscFilled = sscFields.filter(f => f !== null && f !== undefined && String(f).trim()).length;
 
     const skillsFilled = this.skills().length > 0 ? 1 : 0;
@@ -980,7 +999,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     const sections = [
       { label: 'Basic Info',  filled: basicFilled,          total: 6, done: basicFilled === 6 },
       { label: 'Skills',      filled: skillsFilled,         total: 1, done: skillsFilled === 1 },
-      { label: 'Academic',    filled: degFilled + hscFilled + sscFilled, total: 10, done: degFilled >= 5 },
+      { label: 'Academic',    filled: degFilled + hscFilled + sscFilled, total: 12, done: degFilled >= 5 },
       { label: 'Experience',  filled: hasExp,               total: 1, done: hasExp === 1 },
       { label: 'Links',       filled: linkFilled + hasResume,total: 3, done: (linkFilled + hasResume) >= 2 },
     ];
@@ -1038,8 +1057,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
           graduationYear:  raw.education.degree.graduationYear,
           cgpa:            raw.education.degree.cgpa
         },
-        hsc: { schoolName: raw.education.hsc.schoolName, percentage: raw.education.hsc.percentage },
-        ssc: { schoolName: raw.education.ssc.schoolName, percentage: raw.education.ssc.percentage }
+        hsc: { schoolName: raw.education.hsc.schoolName, percentage: raw.education.hsc.percentage, passoutYear: raw.education.hsc.passoutYear },
+        ssc: { schoolName: raw.education.ssc.schoolName, percentage: raw.education.ssc.percentage, passoutYear: raw.education.ssc.passoutYear }
       },
       experience,
       links: {
