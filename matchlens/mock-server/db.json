@@ -6,6 +6,13 @@
       "email": "alex@example.com",
       "password": "password123",
       "studentId": "student-1"
+    },
+    {
+      "id": "user-1784361102035",
+      "name": "Sri",
+      "email": "srigowtham289@gmail.com",
+      "password": "match636",
+      "studentId": "student-1784361102035"
     }
   ],
   "students": [
@@ -74,6 +81,15 @@
           }
         ]
       }
+    },
+    {
+      "id": "student-1784361102035",
+      "name": "Sri",
+      "email": "srigowtham289@gmail.com",
+      "skills": [],
+      "gpa": 0,
+      "workAuthStatus": "us_citizen",
+      "resumeLink": ""
     }
   ],
   "matchedListings": [

@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://api.matchlens.io'
+  apiUrl: 'https://matchlens-production.up.railway.app'
 };
