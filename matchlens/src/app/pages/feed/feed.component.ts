@@ -160,7 +160,7 @@ export class FeedComponent implements OnInit {
     this.error.set(false);
 
     forkJoin({
-      listings: this.api.getMatchedListings(id, {}),
+      listings: this.api.getAllListings(),
       apps: this.api.getApplications(id)
     }).subscribe({
       next: (res) => {
@@ -170,7 +170,11 @@ export class FeedComponent implements OnInit {
         this.loading.set(false);
       },
       error: (err: HttpErrorResponse) => {
-        console.error(`[Feed] Failed to load listings — HTTP ${err.status}: ${err.message}`);
+        console.error(
+          `[Feed] Failed to load listings — HTTP ${err.status}`,
+          err.message,
+          err.error
+        );
         this.error.set(true);
         this.loading.set(false);
       }
