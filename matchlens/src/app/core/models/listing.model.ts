@@ -1,0 +1,30 @@
+export interface MatchBreakdown {
+  skillMatch: number;       // 0–100 percent
+  gpaMet: boolean;
+  authCompatible: boolean;
+  matchedSkills: string[];
+}
+
+export interface MatchedListing {
+  listingId: string;
+  title: string;
+  company: string;
+  location: string;
+  workMode: WorkMode;
+  score: number;            // 0–100 overall match score
+  breakdown: MatchBreakdown;
+  // Additional fields for simulator / filtering
+  requiredSkills?: string[];
+  minGpa?: number;
+  sponsorshipAvailable?: boolean;
+  role?: string;
+}
+
+export type WorkMode = 'remote' | 'onsite' | 'hybrid';
+
+export interface ListingFilters {
+  role?: string;
+  location?: string;
+  workMode?: WorkMode | '';
+  sponsorship?: boolean | null;
+}

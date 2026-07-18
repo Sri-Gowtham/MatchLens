@@ -1,0 +1,117 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Google Fonts are loaded in index.html ── */
+
+/* ── Base resets ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-background text-text-primary font-sans;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Typography helpers ── */
+h1, h2, h3, h4, h5, h6 {
+  @apply font-serif;
+}
+
+/* ── Transition defaults ── */
+a, button {
+  @apply transition-all duration-200;
+}
+
+/* ── Custom scrollbar ── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-background;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-border rounded-full;
+}
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-text-secondary;
+}
+
+/* ── Component layer utilities ── */
+@layer components {
+  /* Buttons */
+  .btn-primary {
+    @apply bg-primary text-white px-5 py-2.5 rounded-xl font-sans font-medium
+           hover:bg-primary-dark active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed
+           transition-all duration-200 inline-flex items-center gap-2;
+  }
+  .btn-secondary {
+    @apply bg-transparent text-primary border border-primary px-5 py-2.5 rounded-xl font-sans font-medium
+           hover:bg-primary hover:text-white active:scale-95 disabled:opacity-50
+           transition-all duration-200 inline-flex items-center gap-2;
+  }
+  .btn-accent {
+    @apply bg-accent text-white px-5 py-2.5 rounded-xl font-sans font-medium
+           hover:bg-accent-dark active:scale-95 disabled:opacity-50
+           transition-all duration-200 inline-flex items-center gap-2;
+  }
+
+  /* Cards */
+  .card {
+    @apply bg-surface rounded-2xl shadow-card border border-border p-6
+           hover:shadow-card-hover transition-shadow duration-300;
+  }
+
+  /* Form inputs */
+  .form-input {
+    @apply w-full border border-border rounded-xl px-4 py-2.5 font-sans text-sm
+           bg-white text-text-primary placeholder:text-text-secondary
+           focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary
+           transition-all duration-200;
+  }
+  .form-label {
+    @apply block text-sm font-medium text-text-primary mb-1.5 font-sans;
+  }
+  .form-error {
+    @apply text-danger text-xs mt-1 font-sans;
+  }
+  .form-group {
+    @apply flex flex-col gap-1;
+  }
+
+  /* Score badges */
+  .badge-success {
+    @apply bg-success/10 text-success border border-success/30 px-2.5 py-1 rounded-full text-xs font-semibold font-sans;
+  }
+  .badge-warning {
+    @apply bg-warning/10 text-warning border border-warning/30 px-2.5 py-1 rounded-full text-xs font-semibold font-sans;
+  }
+  .badge-danger {
+    @apply bg-danger/10 text-danger border border-danger/30 px-2.5 py-1 rounded-full text-xs font-semibold font-sans;
+  }
+
+  /* Skill chips */
+  .chip {
+    @apply inline-flex items-center gap-1.5 bg-primary/8 text-primary px-3 py-1 rounded-full text-xs font-medium font-sans
+           border border-primary/15 hover:bg-primary/12 transition-colors;
+  }
+  .chip-removable {
+    @apply inline-flex items-center gap-1.5 bg-primary/8 text-primary px-3 py-1 rounded-full text-xs font-medium font-sans
+           border border-primary/15;
+  }
+
+  /* Section headers */
+  .section-title {
+    @apply text-xl font-serif font-semibold text-primary;
+  }
+  .page-title {
+    @apply text-3xl font-serif font-bold text-primary;
+  }
+}

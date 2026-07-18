@@ -1,0 +1,348 @@
+{
+  "users": [
+    {
+      "id": "user-1",
+      "name": "Alex Chen",
+      "email": "alex@example.com",
+      "password": "password123",
+      "studentId": "student-1"
+    }
+  ],
+  "students": [
+    {
+      "id": "student-1",
+      "name": "Alex Chen",
+      "email": "alex@example.com",
+      "skills": ["Python", "Machine Learning", "SQL", "React", "TypeScript"],
+      "gpa": 3.7,
+      "workAuthStatus": "opt_cpt",
+      "resumeLink": "https://linkedin.com/in/alexchen"
+    }
+  ],
+  "matchedListings": [
+    {
+      "listingId": "ml-001",
+      "title": "Software Engineering Intern",
+      "company": "Stripe",
+      "location": "San Francisco, CA",
+      "workMode": "hybrid",
+      "role": "Software Engineering",
+      "score": 91,
+      "sponsorshipAvailable": false,
+      "requiredSkills": ["Python", "TypeScript", "SQL", "React"],
+      "minGpa": 3.0,
+      "breakdown": {
+        "skillMatch": 95,
+        "gpaMet": true,
+        "authCompatible": true,
+        "matchedSkills": ["Python", "TypeScript", "SQL", "React"]
+      }
+    },
+    {
+      "listingId": "ml-002",
+      "title": "Machine Learning Engineer Intern",
+      "company": "OpenAI",
+      "location": "San Francisco, CA",
+      "workMode": "onsite",
+      "role": "Machine Learning",
+      "score": 88,
+      "sponsorshipAvailable": true,
+      "requiredSkills": ["Python", "Machine Learning", "PyTorch", "SQL"],
+      "minGpa": 3.5,
+      "breakdown": {
+        "skillMatch": 90,
+        "gpaMet": true,
+        "authCompatible": true,
+        "matchedSkills": ["Python", "Machine Learning", "SQL"]
+      }
+    },
+    {
+      "listingId": "ml-003",
+      "title": "Data Science Intern",
+      "company": "Airbnb",
+      "location": "Remote",
+      "workMode": "remote",
+      "role": "Data Science",
+      "score": 82,
+      "sponsorshipAvailable": false,
+      "requiredSkills": ["Python", "SQL", "Machine Learning", "Tableau"],
+      "minGpa": 3.2,
+      "breakdown": {
+        "skillMatch": 85,
+        "gpaMet": true,
+        "authCompatible": true,
+        "matchedSkills": ["Python", "SQL", "Machine Learning"]
+      }
+    },
+    {
+      "listingId": "ml-004",
+      "title": "Frontend Engineer Intern",
+      "company": "Figma",
+      "location": "New York, NY",
+      "workMode": "hybrid",
+      "role": "Frontend Engineering",
+      "score": 78,
+      "sponsorshipAvailable": false,
+      "requiredSkills": ["React", "TypeScript", "CSS", "GraphQL"],
+      "minGpa": 3.0,
+      "breakdown": {
+        "skillMatch": 75,
+        "gpaMet": true,
+        "authCompatible": true,
+        "matchedSkills": ["React", "TypeScript"]
+      }
+    },
+    {
+      "listingId": "ml-005",
+      "title": "Backend Engineering Intern",
+      "company": "Notion",
+      "location": "Remote",
+      "workMode": "remote",
+      "role": "Backend Engineering",
+      "score": 71,
+      "sponsorshipAvailable": true,
+      "requiredSkills": ["Python", "Go", "PostgreSQL", "Docker"],
+      "minGpa": 3.0,
+      "breakdown": {
+        "skillMatch": 65,
+        "gpaMet": true,
+        "authCompatible": true,
+        "matchedSkills": ["Python"]
+      }
+    },
+    {
+      "listingId": "ml-006",
+      "title": "Research Scientist Intern",
+      "company": "DeepMind",
+      "location": "New York, NY",
+      "workMode": "onsite",
+      "role": "Research",
+      "score": 67,
+      "sponsorshipAvailable": true,
+      "requiredSkills": ["Python", "Machine Learning", "PyTorch", "Research Papers", "Statistics"],
+      "minGpa": 3.8,
+      "breakdown": {
+        "skillMatch": 72,
+        "gpaMet": false,
+        "authCompatible": true,
+        "matchedSkills": ["Python", "Machine Learning"]
+      }
+    },
+    {
+      "listingId": "ml-007",
+      "title": "Full Stack Developer Intern",
+      "company": "Linear",
+      "location": "Remote",
+      "workMode": "remote",
+      "role": "Full Stack",
+      "score": 76,
+      "sponsorshipAvailable": false,
+      "requiredSkills": ["React", "TypeScript", "Node.js", "PostgreSQL"],
+      "minGpa": 3.0,
+      "breakdown": {
+        "skillMatch": 70,
+        "gpaMet": true,
+        "authCompatible": true,
+        "matchedSkills": ["React", "TypeScript"]
+      }
+    },
+    {
+      "listingId": "ml-008",
+      "title": "Data Analyst Intern",
+      "company": "Robinhood",
+      "location": "Menlo Park, CA",
+      "workMode": "hybrid",
+      "role": "Data Analytics",
+      "score": 63,
+      "sponsorshipAvailable": false,
+      "requiredSkills": ["SQL", "Python", "Tableau", "Excel", "Statistics"],
+      "minGpa": 3.0,
+      "breakdown": {
+        "skillMatch": 60,
+        "gpaMet": true,
+        "authCompatible": true,
+        "matchedSkills": ["SQL", "Python"]
+      }
+    },
+    {
+      "listingId": "ml-009",
+      "title": "Product Analytics Intern",
+      "company": "Duolingo",
+      "location": "Pittsburgh, PA",
+      "workMode": "onsite",
+      "role": "Product Analytics",
+      "score": 58,
+      "sponsorshipAvailable": false,
+      "requiredSkills": ["SQL", "Python", "Product Sense", "A/B Testing", "Looker"],
+      "minGpa": 3.2,
+      "breakdown": {
+        "skillMatch": 55,
+        "gpaMet": true,
+        "authCompatible": true,
+        "matchedSkills": ["SQL", "Python"]
+      }
+    },
+    {
+      "listingId": "ml-010",
+      "title": "AI/ML Platform Engineer Intern",
+      "company": "Databricks",
+      "location": "San Francisco, CA",
+      "workMode": "hybrid",
+      "role": "Machine Learning",
+      "score": 84,
+      "sponsorshipAvailable": true,
+      "requiredSkills": ["Python", "Machine Learning", "SQL", "Spark", "Cloud (AWS/GCP)"],
+      "minGpa": 3.3,
+      "breakdown": {
+        "skillMatch": 88,
+        "gpaMet": true,
+        "authCompatible": true,
+        "matchedSkills": ["Python", "Machine Learning", "SQL"]
+      }
+    },
+    {
+      "listingId": "ml-011",
+      "title": "iOS Developer Intern",
+      "company": "Calm",
+      "location": "San Francisco, CA",
+      "workMode": "hybrid",
+      "role": "Mobile Engineering",
+      "score": 38,
+      "sponsorshipAvailable": false,
+      "requiredSkills": ["Swift", "Objective-C", "iOS SDK", "UIKit", "Xcode"],
+      "minGpa": 3.0,
+      "breakdown": {
+        "skillMatch": 20,
+        "gpaMet": true,
+        "authCompatible": true,
+        "matchedSkills": []
+      }
+    },
+    {
+      "listingId": "ml-012",
+      "title": "Quantitative Research Intern",
+      "company": "Jane Street",
+      "location": "New York, NY",
+      "workMode": "onsite",
+      "role": "Quantitative Research",
+      "score": 72,
+      "sponsorshipAvailable": false,
+      "requiredSkills": ["Python", "Statistics", "Linear Algebra", "Probability", "OCaml"],
+      "minGpa": 3.7,
+      "breakdown": {
+        "skillMatch": 65,
+        "gpaMet": true,
+        "authCompatible": true,
+        "matchedSkills": ["Python"]
+      }
+    },
+    {
+      "listingId": "ml-013",
+      "title": "Cloud Infrastructure Intern",
+      "company": "Cloudflare",
+      "location": "Remote",
+      "workMode": "remote",
+      "role": "DevOps / Infrastructure",
+      "score": 44,
+      "sponsorshipAvailable": true,
+      "requiredSkills": ["Go", "Rust", "Kubernetes", "Docker", "Linux"],
+      "minGpa": 3.0,
+      "breakdown": {
+        "skillMatch": 30,
+        "gpaMet": true,
+        "authCompatible": true,
+        "matchedSkills": []
+      }
+    },
+    {
+      "listingId": "ml-014",
+      "title": "NLP Research Intern",
+      "company": "Cohere",
+      "location": "Remote",
+      "workMode": "remote",
+      "role": "Research",
+      "score": 79,
+      "sponsorshipAvailable": true,
+      "requiredSkills": ["Python", "Machine Learning", "NLP", "HuggingFace", "PyTorch"],
+      "minGpa": 3.5,
+      "breakdown": {
+        "skillMatch": 80,
+        "gpaMet": true,
+        "authCompatible": true,
+        "matchedSkills": ["Python", "Machine Learning"]
+      }
+    },
+    {
+      "listingId": "ml-015",
+      "title": "Growth Engineering Intern",
+      "company": "Canva",
+      "location": "Austin, TX",
+      "workMode": "hybrid",
+      "role": "Full Stack",
+      "score": 66,
+      "sponsorshipAvailable": false,
+      "requiredSkills": ["React", "TypeScript", "Python", "A/B Testing", "Analytics"],
+      "minGpa": 3.0,
+      "breakdown": {
+        "skillMatch": 65,
+        "gpaMet": true,
+        "authCompatible": true,
+        "matchedSkills": ["React", "TypeScript", "Python"]
+      }
+    },
+    {
+      "listingId": "ml-016",
+      "title": "Security Engineering Intern",
+      "company": "Palo Alto Networks",
+      "location": "Santa Clara, CA",
+      "workMode": "onsite",
+      "role": "Security",
+      "score": 41,
+      "sponsorshipAvailable": false,
+      "requiredSkills": ["Python", "Network Security", "Linux", "C++", "Cryptography"],
+      "minGpa": 3.2,
+      "breakdown": {
+        "skillMatch": 25,
+        "gpaMet": true,
+        "authCompatible": true,
+        "matchedSkills": ["Python"]
+      }
+    },
+    {
+      "listingId": "ml-017",
+      "title": "Data Engineering Intern",
+      "company": "Snowflake",
+      "location": "San Mateo, CA",
+      "workMode": "hybrid",
+      "role": "Data Engineering",
+      "score": 73,
+      "sponsorshipAvailable": true,
+      "requiredSkills": ["Python", "SQL", "Spark", "dbt", "Cloud (AWS/GCP)"],
+      "minGpa": 3.0,
+      "breakdown": {
+        "skillMatch": 75,
+        "gpaMet": true,
+        "authCompatible": true,
+        "matchedSkills": ["Python", "SQL"]
+      }
+    },
+    {
+      "listingId": "ml-018",
+      "title": "Applied Scientist Intern",
+      "company": "Amazon",
+      "location": "Seattle, WA",
+      "workMode": "onsite",
+      "role": "Machine Learning",
+      "score": 85,
+      "sponsorshipAvailable": true,
+      "requiredSkills": ["Python", "Machine Learning", "SQL", "Statistics", "AWS"],
+      "minGpa": 3.5,
+      "breakdown": {
+        "skillMatch": 88,
+        "gpaMet": true,
+        "authCompatible": true,
+        "matchedSkills": ["Python", "Machine Learning", "SQL"]
+      }
+    }
+  ]
+}
