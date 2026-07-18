@@ -591,5 +591,14 @@
       "employmentType": "internship_unpaid",
       "summary": "Join Amazon as a Applied Scientist Intern and help us build amazing products."
     }
+  ],
+  "applications": [
+    {
+      "studentId": "student-1",
+      "listingId": "ml-001",
+      "status": "applied",
+      "updatedAt": "2026-07-18T05:14:04.340Z",
+      "id": 1
+    }
   ]
 }

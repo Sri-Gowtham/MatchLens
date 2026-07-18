@@ -1,8 +1,10 @@
 import { Component, OnInit, signal } from '@angular/core';
+import { forkJoin } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { ApiService } from '../../core/services/api.service';
 import { AuthService } from '../../core/services/auth.service';
 import { MatchedListing, ListingFilters } from '../../core/models/listing.model';
+import { Application } from '../../core/models/application.model';
 import { FilterBarComponent } from './components/filter-bar/filter-bar.component';
 import { ListingCardComponent } from './components/listing-card/listing-card.component';
 import { RouterLink } from '@angular/router';
@@ -106,7 +108,11 @@ import { RouterLink } from '@angular/router';
           @if (!loading() && !error()) {
             <div class="space-y-4">
               @for (listing of filteredListings(); track listing.listingId) {
-                <app-listing-card [listing]="listing" />
+                <app-listing-card 
+                  [listing]="listing"
+                  [application]="getApplication(listing.listingId)"
+                  (save)="handleSave(listing.listingId)"
+                  (apply)="handleApply(listing.listingId)" />
               }
             </div>
           }
@@ -139,6 +145,7 @@ import { RouterLink } from '@angular/router';
 export class FeedComponent implements OnInit {
   allListings = signal<MatchedListing[]>([]);
   filteredListings = signal<MatchedListing[]>([]);
+  applications = signal<Application[]>([]);
   loading = signal(true);
   error = signal(false);
   private activeFilters: ListingFilters = {};
@@ -152,9 +159,13 @@ export class FeedComponent implements OnInit {
     this.loading.set(true);
     this.error.set(false);
 
-    this.api.getMatchedListings(id, {}).subscribe({
-      next: (listings) => {
-        this.allListings.set(listings);
+    forkJoin({
+      listings: this.api.getMatchedListings(id, {}),
+      apps: this.api.getApplications(id)
+    }).subscribe({
+      next: (res) => {
+        this.allListings.set(res.listings);
+        this.applications.set(res.apps);
         this.applyFilters();
         this.loading.set(false);
       },
@@ -163,6 +174,54 @@ export class FeedComponent implements OnInit {
         this.loading.set(false);
       }
     });
+  }
+
+  getApplication(listingId: string): Application | undefined {
+    return this.applications().find(a => a.listingId === listingId);
+  }
+
+  handleSave(listingId: string) {
+    const studentId = this.auth.getStudentId();
+    if (!studentId) return;
+
+    const existing = this.getApplication(listingId);
+    if (existing) {
+      if (existing.status !== 'saved') return;
+      // Already saved, do nothing or unsave if we had that feature
+    } else {
+      this.api.createApplication({
+        studentId,
+        listingId,
+        status: 'saved',
+        updatedAt: new Date().toISOString()
+      }).subscribe(app => {
+        this.applications.set([...this.applications(), app]);
+      });
+    }
+  }
+
+  handleApply(listingId: string) {
+    const studentId = this.auth.getStudentId();
+    if (!studentId) return;
+
+    const existing = this.getApplication(listingId);
+    if (existing) {
+      this.api.updateApplication(existing.id!, {
+        status: 'applied',
+        updatedAt: new Date().toISOString()
+      }).subscribe(app => {
+        this.applications.set(this.applications().map(a => a.id === app.id ? app : a));
+      });
+    } else {
+      this.api.createApplication({
+        studentId,
+        listingId,
+        status: 'applied',
+        updatedAt: new Date().toISOString()
+      }).subscribe(app => {
+        this.applications.set([...this.applications(), app]);
+      });
+    }
   }
 
   onFiltersChanged(filters: ListingFilters) {

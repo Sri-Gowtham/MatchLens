@@ -4,6 +4,7 @@ import { Observable, map } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { Student } from '../models/student.model';
 import { MatchedListing, ListingFilters } from '../models/listing.model';
+import { Application } from '../models/application.model';
 
 export interface AuthResponse {
   token: string;
@@ -58,5 +59,20 @@ export class ApiService {
   // Raw listings (used by simulator for requiredSkills / minGpa data)
   getAllListings(): Observable<MatchedListing[]> {
     return this.http.get<MatchedListing[]>(`${this.base}/matchedListings`);
+  }
+  // ─── Applications ─────────────────────────────────────────────────────────
+
+  getApplications(studentId: string): Observable<Application[]> {
+    return this.http.get<Application[]>(`${this.base}/applications`, {
+      params: { studentId }
+    });
+  }
+
+  createApplication(data: Partial<Application>): Observable<Application> {
+    return this.http.post<Application>(`${this.base}/applications`, data);
+  }
+
+  updateApplication(id: string, data: Partial<Application>): Observable<Application> {
+    return this.http.patch<Application>(`${this.base}/applications/${id}`, data);
   }
 }

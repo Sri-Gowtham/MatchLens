@@ -26,5 +26,10 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/insights/insights.component').then(m => m.InsightsComponent),
     canActivate: [authGuard]
   },
+  {
+    path: 'applications',
+    loadComponent: () => import('./pages/applications/applications.component').then(m => m.ApplicationsComponent),
+    canActivate: [authGuard]
+  },
   { path: '**', redirectTo: '/feed' }
 ];

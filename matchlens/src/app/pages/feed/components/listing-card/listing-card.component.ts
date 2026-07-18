@@ -1,7 +1,8 @@
-import { Component, Input, signal } from '@angular/core';
+import { Component, Input, Output, EventEmitter, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatchedListing } from '../../../../core/models/listing.model';
 import { ScoreBadgeComponent } from '../../../../shared/score-badge/score-badge.component';
+import { Application } from '../../../../core/models/application.model';
 
 @Component({
   selector: 'app-listing-card',
@@ -103,6 +104,34 @@ import { ScoreBadgeComponent } from '../../../../shared/score-badge/score-badge.
                 {{ expanded() ? 'Hide breakdown' : 'Why this matched' }}
               </span>
             </button>
+            
+            <!-- Actions -->
+            <div class="mt-4 flex items-center gap-2">
+              @if (!application || application.status === 'saved') {
+                <button (click)="save.emit()" 
+                        [disabled]="application?.status === 'saved'"
+                        class="px-3 py-1.5 rounded-lg text-xs font-sans font-medium transition-colors"
+                        [ngClass]="(application?.status === 'saved') ? 'bg-border text-text-secondary' : 'bg-primary text-white hover:bg-primary/90'">
+                  {{ application?.status === 'saved' ? 'Saved' : 'Save' }}
+                </button>
+                <button (click)="apply.emit()"
+                        class="px-3 py-1.5 rounded-lg bg-accent text-white text-xs font-sans font-medium hover:bg-accent/90 transition-colors">
+                  Apply
+                </button>
+              } @else {
+                <span class="inline-flex items-center gap-1.5 text-xs font-semibold font-sans px-2.5 py-1 rounded-full"
+                      [ngClass]="(application.status === 'applied') ? 'bg-accent/10 text-accent' : 'bg-warning/10 text-warning'">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    @if (application.status === 'applied') {
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    } @else if (application.status === 'in_review') {
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    }
+                  </svg>
+                  {{ application.status === 'applied' ? 'Applied' : 'In Review' }}
+                </span>
+              }
+            </div>
           </div>
 
           <!-- Score badge pinned top-right -->
@@ -204,6 +233,10 @@ import { ScoreBadgeComponent } from '../../../../shared/score-badge/score-badge.
 })
 export class ListingCardComponent {
   @Input({ required: true }) listing!: MatchedListing;
+  @Input() application?: Application;
+
+  @Output() save = new EventEmitter<void>();
+  @Output() apply = new EventEmitter<void>();
 
   expanded = signal(false);
 
