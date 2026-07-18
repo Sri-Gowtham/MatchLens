@@ -1,4 +1,4 @@
-export type ApplicationStatus = 'saved' | 'applied' | 'in_review';
+export type ApplicationStatus = 'SAVED' | 'APPLIED' | 'IN_REVIEW';
 
 export interface Application {
   id?: string;

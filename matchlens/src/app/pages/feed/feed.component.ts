@@ -186,13 +186,13 @@ export class FeedComponent implements OnInit {
 
     const existing = this.getApplication(listingId);
     if (existing) {
-      if (existing.status !== 'saved') return;
+      if (existing.status !== 'SAVED') return;
       // Already saved, do nothing or unsave if we had that feature
     } else {
       this.api.createApplication({
         studentId,
         listingId,
-        status: 'saved',
+        status: 'SAVED',
         updatedAt: new Date().toISOString()
       }).subscribe(app => {
         this.applications.set([...this.applications(), app]);
@@ -207,7 +207,7 @@ export class FeedComponent implements OnInit {
     const existing = this.getApplication(listingId);
     if (existing) {
       this.api.updateApplication(existing.id!, {
-        status: 'applied',
+        status: 'APPLIED',
         updatedAt: new Date().toISOString()
       }).subscribe(app => {
         this.applications.set(this.applications().map(a => a.id === app.id ? app : a));
@@ -216,7 +216,7 @@ export class FeedComponent implements OnInit {
       this.api.createApplication({
         studentId,
         listingId,
-        status: 'applied',
+        status: 'APPLIED',
         updatedAt: new Date().toISOString()
       }).subscribe(app => {
         this.applications.set([...this.applications(), app]);

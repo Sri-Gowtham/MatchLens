@@ -36,7 +36,7 @@ export class ApiService {
   }
 
   updateStudent(id: string, data: Partial<Student>): Observable<Student> {
-    return this.http.patch<Student>(`${this.base}/students/${id}`, data);
+    return this.http.put<Student>(`${this.base}/students/${id}`, data);
   }
 
   // ─── Listings ─────────────────────────────────────────────────────────────
@@ -51,14 +51,14 @@ export class ApiService {
     // json-server stores listings flat; we compute scores client-side from the
     // student data. The backend returns raw listings; the interceptor & service
     // handle score injection in a real backend. For mock: use /matchedListings.
-    return this.http.get<MatchedListing[]>(`${this.base}/matchedListings`, { params }).pipe(
+    return this.http.get<MatchedListing[]>(`${this.base}/listings/matched`, { params }).pipe(
       map(listings => [...listings].sort((a, b) => b.score - a.score))
     );
   }
 
   // Raw listings (used by simulator for requiredSkills / minGpa data)
   getAllListings(): Observable<MatchedListing[]> {
-    return this.http.get<MatchedListing[]>(`${this.base}/matchedListings`);
+    return this.http.get<MatchedListing[]>(`${this.base}/listings/matched`);
   }
   // ─── Applications ─────────────────────────────────────────────────────────
 

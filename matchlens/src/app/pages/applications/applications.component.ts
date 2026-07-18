@@ -115,9 +115,9 @@ interface AppCardData {
           <select [ngModel]="item.application.status" 
                   (ngModelChange)="updateStatus(item, $event)"
                   class="text-xs font-sans bg-surface border-border rounded-md px-2 py-1 outline-none focus:ring-1 focus:ring-primary/50 cursor-pointer">
-            <option value="saved">Saved</option>
-            <option value="applied">Applied</option>
-            <option value="in_review">In Review</option>
+            <option value="SAVED">Saved</option>
+            <option value="APPLIED">Applied</option>
+            <option value="IN_REVIEW">In Review</option>
           </select>
         </div>
       </div>
@@ -131,9 +131,9 @@ export class ApplicationsComponent implements OnInit {
   loading = signal(true);
   joinedData = signal<AppCardData[]>([]);
 
-  savedList = computed(() => this.joinedData().filter(d => d.application.status === 'saved'));
-  appliedList = computed(() => this.joinedData().filter(d => d.application.status === 'applied'));
-  inReviewList = computed(() => this.joinedData().filter(d => d.application.status === 'in_review'));
+  savedList = computed(() => this.joinedData().filter(d => d.application.status === 'SAVED'));
+  appliedList = computed(() => this.joinedData().filter(d => d.application.status === 'APPLIED'));
+  inReviewList = computed(() => this.joinedData().filter(d => d.application.status === 'IN_REVIEW'));
 
   ngOnInit() {
     const studentId = this.authSvc.getStudentId();

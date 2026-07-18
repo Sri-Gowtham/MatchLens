@@ -318,7 +318,7 @@ export class InsightsComponent implements OnInit {
   authClearsCount = computed(() => {
     const s = this.student();
     if (!s) return 0;
-    const needsSponsorship = s.workAuthStatus === 'needs_sponsorship';
+    const needsSponsorship = s.workAuthStatus === 'NEEDS_SPONSORSHIP';
     return this.allListings().filter(l => {
       const needsSponsor = needsSponsorship && !l.sponsorshipAvailable;
       return !needsSponsor;
@@ -331,7 +331,7 @@ export class InsightsComponent implements OnInit {
     if (!s || listings.length === 0) return [];
 
     const baseGpa = normalisedGpa(s);
-    const baseNeedsSponsorship = s.workAuthStatus === 'needs_sponsorship';
+    const baseNeedsSponsorship = s.workAuthStatus === 'NEEDS_SPONSORSHIP';
     const studentSkillsLower = new Set((s.skills ?? []).map(sk => sk.toLowerCase()));
 
     const impacts: SkillImpact[] = [];

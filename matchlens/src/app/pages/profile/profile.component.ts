@@ -752,7 +752,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     city:           ['', Validators.required],
     address:        [''],
     about:          ['', [wordCountValidator(150)]],
-    workAuthStatus: ['citizen' as WorkAuthStatus, Validators.required],
+    workAuthStatus: ['CITIZEN' as WorkAuthStatus, Validators.required],
 
     education: this.fb.group({
       degree: this.fb.group({

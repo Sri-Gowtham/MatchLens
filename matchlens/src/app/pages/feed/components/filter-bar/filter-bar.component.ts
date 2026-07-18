@@ -85,9 +85,9 @@ import { debounceTime, distinctUntilChanged } from 'rxjs';
           <label for="filter-work-mode" class="form-label text-xs">Work mode</label>
           <select id="filter-work-mode" formControlName="workMode" class="form-input text-sm mt-1">
             <option value="">All modes</option>
-            <option value="remote">Remote</option>
-            <option value="hybrid">Hybrid</option>
-            <option value="onsite">On-site</option>
+            <option value="REMOTE">Remote</option>
+            <option value="HYBRID">Hybrid</option>
+            <option value="ONSITE">On-site</option>
           </select>
         </div>
 

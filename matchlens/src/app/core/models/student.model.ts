@@ -1,14 +1,14 @@
 // ─── Work Authorization ───────────────────────────────────────────────────
 
 export type WorkAuthStatus =
-  | 'citizen'
-  | 'needs_sponsorship'
-  | 'no_sponsorship_needed';
+  | 'CITIZEN'
+  | 'NEEDS_SPONSORSHIP'
+  | 'NO_SPONSORSHIP_NEEDED';
 
 export const WORK_AUTH_LABELS: Record<WorkAuthStatus, string> = {
-  citizen: 'Citizen / Permanent Resident',
-  no_sponsorship_needed: 'OPT / CPT / No Sponsorship Needed',
-  needs_sponsorship: 'Requires H1B / Visa Sponsorship'
+  CITIZEN: 'Citizen / Permanent Resident',
+  NO_SPONSORSHIP_NEEDED: 'OPT / CPT / No Sponsorship Needed',
+  NEEDS_SPONSORSHIP: 'Requires H1B / Visa Sponsorship'
 };
 
 // ─── Sub-interfaces ───────────────────────────────────────────────────────

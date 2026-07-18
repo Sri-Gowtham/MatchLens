@@ -22,7 +22,7 @@ export interface MatchedListing {
   summary?: string;
 }
 
-export type WorkMode = 'remote' | 'onsite' | 'hybrid';
+export type WorkMode = 'REMOTE' | 'ONSITE' | 'HYBRID';
 
 export interface ListingFilters {
   role?: string;

@@ -107,12 +107,12 @@ import { Application } from '../../../../core/models/application.model';
             
             <!-- Actions -->
             <div class="mt-4 flex items-center gap-2">
-              @if (!application || application.status === 'saved') {
+              @if (!application || application.status === 'SAVED') {
                 <button (click)="save.emit()" 
-                        [disabled]="application?.status === 'saved'"
-                        class="px-3 py-1.5 rounded-lg text-xs font-sans font-medium transition-colors"
-                        [ngClass]="(application?.status === 'saved') ? 'bg-border text-text-secondary' : 'bg-primary text-white hover:bg-primary/90'">
-                  {{ application?.status === 'saved' ? 'Saved' : 'Save' }}
+                        [disabled]="application?.status === 'SAVED'"
+                        class="px-4 py-1.5 rounded-full text-sm font-medium transition-colors"
+                        [ngClass]="(application?.status === 'SAVED') ? 'bg-border text-text-secondary' : 'bg-primary text-white hover:bg-primary/90'">
+                  {{ application?.status === 'SAVED' ? 'Saved' : 'Save' }}
                 </button>
                 <button (click)="apply.emit()"
                         class="px-3 py-1.5 rounded-lg bg-accent text-white text-xs font-sans font-medium hover:bg-accent/90 transition-colors">
@@ -120,15 +120,15 @@ import { Application } from '../../../../core/models/application.model';
                 </button>
               } @else {
                 <span class="inline-flex items-center gap-1.5 text-xs font-semibold font-sans px-2.5 py-1 rounded-full"
-                      [ngClass]="(application.status === 'applied') ? 'bg-accent/10 text-accent' : 'bg-warning/10 text-warning'">
+                      [ngClass]="(application.status === 'APPLIED') ? 'bg-accent/10 text-accent' : 'bg-warning/10 text-warning'">
                   <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    @if (application.status === 'applied') {
+                    @if (application.status === 'APPLIED') {
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    } @else if (application.status === 'in_review') {
+                    } @else if (application.status === 'IN_REVIEW') {
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                     }
                   </svg>
-                  {{ application.status === 'applied' ? 'Applied' : 'In Review' }}
+                  {{ application.status === 'APPLIED' ? 'Applied' : application.status === 'IN_REVIEW' ? 'In Review' : 'Apply Now' }}
                 </span>
               }
             </div>
@@ -252,15 +252,15 @@ export class ListingCardComponent {
   }
 
   get workModeLabel(): string {
-    const labels: Record<string, string> = { remote: 'Remote', hybrid: 'Hybrid', onsite: 'On-site' };
-    return labels[this.listing.workMode] ?? this.listing.workMode;
+    const labels: Record<string, string> = { REMOTE: 'Remote', HYBRID: 'Hybrid', ONSITE: 'On-site' };
+    return labels[this.listing.workMode] || this.listing.workMode;
   }
 
   get workModeClass(): string {
     const classes: Record<string, string> = {
-      remote: 'text-success',
-      hybrid: 'text-warning',
-      onsite: 'text-text-secondary'
+      REMOTE: 'text-success',
+      HYBRID: 'text-info',
+      ONSITE: 'text-warning'
     };
     return classes[this.listing.workMode] ?? 'text-text-secondary';
   }
