@@ -17,9 +17,8 @@
 
 | | |
 |---|---|
-| **Live App** | [{{https://match-lens-tan.vercel.app}}]({{VERCEL_URL}}) |
-| **Demo Video** | [{{https://drive.google.com/drive/folders/1K0s2y4C15g3w-x1XqQJmX_o7P9v7e7s9?usp=drive_lin}}]({{DEMO_VIDEO_URL}}) |
-| **Demo Account** | `demo@matchlens.com` / `password123` |
+| 🚀 **Live App** | [match-lens-tan.vercel.app](https://match-lens-tan.vercel.app) |
+| 🎬 **Demo Video** | [Watch on Google Drive](https://drive.google.com/drive/folders/1K0s2y4C15g3w-x1XqQJmX_o7P9v7e7s9?usp=drive_link) |
 
 ---
 
