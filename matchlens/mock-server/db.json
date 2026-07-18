@@ -13,10 +13,67 @@
       "id": "student-1",
       "name": "Alex Chen",
       "email": "alex@example.com",
-      "skills": ["Python", "Machine Learning", "SQL", "React", "TypeScript"],
-      "gpa": 3.7,
-      "workAuthStatus": "opt_cpt",
-      "resumeLink": "https://linkedin.com/in/alexchen"
+      "phone": "+1 415-555-0192",
+      "country": "United States",
+      "city": "San Francisco",
+      "address": "123 Market Street, Apt 4B",
+      "about": "Short bio test.",
+      "workAuthStatus": "no_sponsorship_needed",
+      "skills": [
+        "Python",
+        "Machine Learning",
+        "SQL",
+        "TypeScript",
+        "JavaScript",
+        "Kubernetes"
+      ],
+      "education": {
+        "degree": {
+          "institution": "University of California, Berkeley",
+          "degreeName": "Bachelor of Science",
+          "branch": "Computer Science",
+          "graduationMonth": "May",
+          "graduationYear": 2025,
+          "cgpa": 3.7
+        },
+        "hsc": {
+          "schoolName": "Lowell High School",
+          "percentage": 94
+        },
+        "ssc": {
+          "schoolName": "Presidio Middle School",
+          "percentage": 97
+        }
+      },
+      "experience": [
+        {
+          "id": "exp-1784341577791-0",
+          "company": "Databricks",
+          "role": "Software Engineering Intern",
+          "startDate": "2024-06",
+          "endDate": "2024-08",
+          "current": false
+        },
+        {
+          "id": "exp-1784341577791-1",
+          "company": "UC Berkeley AI Lab",
+          "role": "Undergraduate Researcher",
+          "startDate": "2023-09",
+          "endDate": null,
+          "current": true
+        }
+      ],
+      "links": {
+        "resumeUrl": null,
+        "linkedin": "https://linkedin.com/in/alexchen",
+        "github": "https://github.com/alexchen",
+        "others": [
+          {
+            "label": "Portfolio",
+            "url": "https://alexchen.dev"
+          }
+        ]
+      }
     }
   ],
   "matchedListings": [
@@ -29,14 +86,26 @@
       "role": "Software Engineering",
       "score": 91,
       "sponsorshipAvailable": false,
-      "requiredSkills": ["Python", "TypeScript", "SQL", "React"],
-      "minGpa": 3.0,
+      "requiredSkills": [
+        "Python",
+        "TypeScript",
+        "SQL",
+        "React"
+      ],
+      "minGpa": 3,
       "breakdown": {
         "skillMatch": 95,
         "gpaMet": true,
         "authCompatible": true,
-        "matchedSkills": ["Python", "TypeScript", "SQL", "React"]
-      }
+        "matchedSkills": [
+          "Python",
+          "TypeScript",
+          "SQL",
+          "React"
+        ]
+      },
+      "employmentType": "internship_stipend",
+      "summary": "Join Stripe as a Software Engineering Intern and help us build amazing products."
     },
     {
       "listingId": "ml-002",
@@ -47,14 +116,25 @@
       "role": "Machine Learning",
       "score": 88,
       "sponsorshipAvailable": true,
-      "requiredSkills": ["Python", "Machine Learning", "PyTorch", "SQL"],
+      "requiredSkills": [
+        "Python",
+        "Machine Learning",
+        "PyTorch",
+        "SQL"
+      ],
       "minGpa": 3.5,
       "breakdown": {
         "skillMatch": 90,
         "gpaMet": true,
         "authCompatible": true,
-        "matchedSkills": ["Python", "Machine Learning", "SQL"]
-      }
+        "matchedSkills": [
+          "Python",
+          "Machine Learning",
+          "SQL"
+        ]
+      },
+      "employmentType": "internship_unpaid",
+      "summary": "Join OpenAI as a Machine Learning Engineer Intern and help us build amazing products."
     },
     {
       "listingId": "ml-003",
@@ -65,14 +145,25 @@
       "role": "Data Science",
       "score": 82,
       "sponsorshipAvailable": false,
-      "requiredSkills": ["Python", "SQL", "Machine Learning", "Tableau"],
+      "requiredSkills": [
+        "Python",
+        "SQL",
+        "Machine Learning",
+        "Tableau"
+      ],
       "minGpa": 3.2,
       "breakdown": {
         "skillMatch": 85,
         "gpaMet": true,
         "authCompatible": true,
-        "matchedSkills": ["Python", "SQL", "Machine Learning"]
-      }
+        "matchedSkills": [
+          "Python",
+          "SQL",
+          "Machine Learning"
+        ]
+      },
+      "employmentType": "internship_stipend",
+      "summary": "Join Airbnb as a Data Science Intern and help us build amazing products."
     },
     {
       "listingId": "ml-004",
@@ -83,14 +174,24 @@
       "role": "Frontend Engineering",
       "score": 78,
       "sponsorshipAvailable": false,
-      "requiredSkills": ["React", "TypeScript", "CSS", "GraphQL"],
-      "minGpa": 3.0,
+      "requiredSkills": [
+        "React",
+        "TypeScript",
+        "CSS",
+        "GraphQL"
+      ],
+      "minGpa": 3,
       "breakdown": {
         "skillMatch": 75,
         "gpaMet": true,
         "authCompatible": true,
-        "matchedSkills": ["React", "TypeScript"]
-      }
+        "matchedSkills": [
+          "React",
+          "TypeScript"
+        ]
+      },
+      "employmentType": "internship_unpaid",
+      "summary": "Join Figma as a Frontend Engineer Intern and help us build amazing products."
     },
     {
       "listingId": "ml-005",
@@ -101,14 +202,23 @@
       "role": "Backend Engineering",
       "score": 71,
       "sponsorshipAvailable": true,
-      "requiredSkills": ["Python", "Go", "PostgreSQL", "Docker"],
-      "minGpa": 3.0,
+      "requiredSkills": [
+        "Python",
+        "Go",
+        "PostgreSQL",
+        "Docker"
+      ],
+      "minGpa": 3,
       "breakdown": {
         "skillMatch": 65,
         "gpaMet": true,
         "authCompatible": true,
-        "matchedSkills": ["Python"]
-      }
+        "matchedSkills": [
+          "Python"
+        ]
+      },
+      "employmentType": "internship_stipend",
+      "summary": "Join Notion as a Backend Engineering Intern and help us build amazing products."
     },
     {
       "listingId": "ml-006",
@@ -119,14 +229,25 @@
       "role": "Research",
       "score": 67,
       "sponsorshipAvailable": true,
-      "requiredSkills": ["Python", "Machine Learning", "PyTorch", "Research Papers", "Statistics"],
+      "requiredSkills": [
+        "Python",
+        "Machine Learning",
+        "PyTorch",
+        "Research Papers",
+        "Statistics"
+      ],
       "minGpa": 3.8,
       "breakdown": {
         "skillMatch": 72,
         "gpaMet": false,
         "authCompatible": true,
-        "matchedSkills": ["Python", "Machine Learning"]
-      }
+        "matchedSkills": [
+          "Python",
+          "Machine Learning"
+        ]
+      },
+      "employmentType": "internship_unpaid",
+      "summary": "Join DeepMind as a Research Scientist Intern and help us build amazing products."
     },
     {
       "listingId": "ml-007",
@@ -137,14 +258,24 @@
       "role": "Full Stack",
       "score": 76,
       "sponsorshipAvailable": false,
-      "requiredSkills": ["React", "TypeScript", "Node.js", "PostgreSQL"],
-      "minGpa": 3.0,
+      "requiredSkills": [
+        "React",
+        "TypeScript",
+        "Node.js",
+        "PostgreSQL"
+      ],
+      "minGpa": 3,
       "breakdown": {
         "skillMatch": 70,
         "gpaMet": true,
         "authCompatible": true,
-        "matchedSkills": ["React", "TypeScript"]
-      }
+        "matchedSkills": [
+          "React",
+          "TypeScript"
+        ]
+      },
+      "employmentType": "internship_stipend",
+      "summary": "Join Linear as a Full Stack Developer Intern and help us build amazing products."
     },
     {
       "listingId": "ml-008",
@@ -155,14 +286,25 @@
       "role": "Data Analytics",
       "score": 63,
       "sponsorshipAvailable": false,
-      "requiredSkills": ["SQL", "Python", "Tableau", "Excel", "Statistics"],
-      "minGpa": 3.0,
+      "requiredSkills": [
+        "SQL",
+        "Python",
+        "Tableau",
+        "Excel",
+        "Statistics"
+      ],
+      "minGpa": 3,
       "breakdown": {
         "skillMatch": 60,
         "gpaMet": true,
         "authCompatible": true,
-        "matchedSkills": ["SQL", "Python"]
-      }
+        "matchedSkills": [
+          "SQL",
+          "Python"
+        ]
+      },
+      "employmentType": "internship_unpaid",
+      "summary": "Join Robinhood as a Data Analyst Intern and help us build amazing products."
     },
     {
       "listingId": "ml-009",
@@ -173,14 +315,25 @@
       "role": "Product Analytics",
       "score": 58,
       "sponsorshipAvailable": false,
-      "requiredSkills": ["SQL", "Python", "Product Sense", "A/B Testing", "Looker"],
+      "requiredSkills": [
+        "SQL",
+        "Python",
+        "Product Sense",
+        "A/B Testing",
+        "Looker"
+      ],
       "minGpa": 3.2,
       "breakdown": {
         "skillMatch": 55,
         "gpaMet": true,
         "authCompatible": true,
-        "matchedSkills": ["SQL", "Python"]
-      }
+        "matchedSkills": [
+          "SQL",
+          "Python"
+        ]
+      },
+      "employmentType": "internship_stipend",
+      "summary": "Join Duolingo as a Product Analytics Intern and help us build amazing products."
     },
     {
       "listingId": "ml-010",
@@ -191,14 +344,26 @@
       "role": "Machine Learning",
       "score": 84,
       "sponsorshipAvailable": true,
-      "requiredSkills": ["Python", "Machine Learning", "SQL", "Spark", "Cloud (AWS/GCP)"],
+      "requiredSkills": [
+        "Python",
+        "Machine Learning",
+        "SQL",
+        "Spark",
+        "Cloud (AWS/GCP)"
+      ],
       "minGpa": 3.3,
       "breakdown": {
         "skillMatch": 88,
         "gpaMet": true,
         "authCompatible": true,
-        "matchedSkills": ["Python", "Machine Learning", "SQL"]
-      }
+        "matchedSkills": [
+          "Python",
+          "Machine Learning",
+          "SQL"
+        ]
+      },
+      "employmentType": "internship_unpaid",
+      "summary": "Join Databricks as a AI/ML Platform Engineer Intern and help us build amazing products."
     },
     {
       "listingId": "ml-011",
@@ -209,14 +374,22 @@
       "role": "Mobile Engineering",
       "score": 38,
       "sponsorshipAvailable": false,
-      "requiredSkills": ["Swift", "Objective-C", "iOS SDK", "UIKit", "Xcode"],
-      "minGpa": 3.0,
+      "requiredSkills": [
+        "Swift",
+        "Objective-C",
+        "iOS SDK",
+        "UIKit",
+        "Xcode"
+      ],
+      "minGpa": 3,
       "breakdown": {
         "skillMatch": 20,
         "gpaMet": true,
         "authCompatible": true,
         "matchedSkills": []
-      }
+      },
+      "employmentType": "internship_stipend",
+      "summary": "Join Calm as a iOS Developer Intern and help us build amazing products."
     },
     {
       "listingId": "ml-012",
@@ -227,14 +400,24 @@
       "role": "Quantitative Research",
       "score": 72,
       "sponsorshipAvailable": false,
-      "requiredSkills": ["Python", "Statistics", "Linear Algebra", "Probability", "OCaml"],
+      "requiredSkills": [
+        "Python",
+        "Statistics",
+        "Linear Algebra",
+        "Probability",
+        "OCaml"
+      ],
       "minGpa": 3.7,
       "breakdown": {
         "skillMatch": 65,
         "gpaMet": true,
         "authCompatible": true,
-        "matchedSkills": ["Python"]
-      }
+        "matchedSkills": [
+          "Python"
+        ]
+      },
+      "employmentType": "internship_unpaid",
+      "summary": "Join Jane Street as a Quantitative Research Intern and help us build amazing products."
     },
     {
       "listingId": "ml-013",
@@ -245,14 +428,22 @@
       "role": "DevOps / Infrastructure",
       "score": 44,
       "sponsorshipAvailable": true,
-      "requiredSkills": ["Go", "Rust", "Kubernetes", "Docker", "Linux"],
-      "minGpa": 3.0,
+      "requiredSkills": [
+        "Go",
+        "Rust",
+        "Kubernetes",
+        "Docker",
+        "Linux"
+      ],
+      "minGpa": 3,
       "breakdown": {
         "skillMatch": 30,
         "gpaMet": true,
         "authCompatible": true,
         "matchedSkills": []
-      }
+      },
+      "employmentType": "internship_stipend",
+      "summary": "Join Cloudflare as a Cloud Infrastructure Intern and help us build amazing products."
     },
     {
       "listingId": "ml-014",
@@ -263,14 +454,25 @@
       "role": "Research",
       "score": 79,
       "sponsorshipAvailable": true,
-      "requiredSkills": ["Python", "Machine Learning", "NLP", "HuggingFace", "PyTorch"],
+      "requiredSkills": [
+        "Python",
+        "Machine Learning",
+        "NLP",
+        "HuggingFace",
+        "PyTorch"
+      ],
       "minGpa": 3.5,
       "breakdown": {
         "skillMatch": 80,
         "gpaMet": true,
         "authCompatible": true,
-        "matchedSkills": ["Python", "Machine Learning"]
-      }
+        "matchedSkills": [
+          "Python",
+          "Machine Learning"
+        ]
+      },
+      "employmentType": "internship_unpaid",
+      "summary": "Join Cohere as a NLP Research Intern and help us build amazing products."
     },
     {
       "listingId": "ml-015",
@@ -281,14 +483,26 @@
       "role": "Full Stack",
       "score": 66,
       "sponsorshipAvailable": false,
-      "requiredSkills": ["React", "TypeScript", "Python", "A/B Testing", "Analytics"],
-      "minGpa": 3.0,
+      "requiredSkills": [
+        "React",
+        "TypeScript",
+        "Python",
+        "A/B Testing",
+        "Analytics"
+      ],
+      "minGpa": 3,
       "breakdown": {
         "skillMatch": 65,
         "gpaMet": true,
         "authCompatible": true,
-        "matchedSkills": ["React", "TypeScript", "Python"]
-      }
+        "matchedSkills": [
+          "React",
+          "TypeScript",
+          "Python"
+        ]
+      },
+      "employmentType": "internship_stipend",
+      "summary": "Join Canva as a Growth Engineering Intern and help us build amazing products."
     },
     {
       "listingId": "ml-016",
@@ -299,14 +513,24 @@
       "role": "Security",
       "score": 41,
       "sponsorshipAvailable": false,
-      "requiredSkills": ["Python", "Network Security", "Linux", "C++", "Cryptography"],
+      "requiredSkills": [
+        "Python",
+        "Network Security",
+        "Linux",
+        "C++",
+        "Cryptography"
+      ],
       "minGpa": 3.2,
       "breakdown": {
         "skillMatch": 25,
         "gpaMet": true,
         "authCompatible": true,
-        "matchedSkills": ["Python"]
-      }
+        "matchedSkills": [
+          "Python"
+        ]
+      },
+      "employmentType": "internship_unpaid",
+      "summary": "Join Palo Alto Networks as a Security Engineering Intern and help us build amazing products."
     },
     {
       "listingId": "ml-017",
@@ -317,14 +541,25 @@
       "role": "Data Engineering",
       "score": 73,
       "sponsorshipAvailable": true,
-      "requiredSkills": ["Python", "SQL", "Spark", "dbt", "Cloud (AWS/GCP)"],
-      "minGpa": 3.0,
+      "requiredSkills": [
+        "Python",
+        "SQL",
+        "Spark",
+        "dbt",
+        "Cloud (AWS/GCP)"
+      ],
+      "minGpa": 3,
       "breakdown": {
         "skillMatch": 75,
         "gpaMet": true,
         "authCompatible": true,
-        "matchedSkills": ["Python", "SQL"]
-      }
+        "matchedSkills": [
+          "Python",
+          "SQL"
+        ]
+      },
+      "employmentType": "internship_stipend",
+      "summary": "Join Snowflake as a Data Engineering Intern and help us build amazing products."
     },
     {
       "listingId": "ml-018",
@@ -335,14 +570,26 @@
       "role": "Machine Learning",
       "score": 85,
       "sponsorshipAvailable": true,
-      "requiredSkills": ["Python", "Machine Learning", "SQL", "Statistics", "AWS"],
+      "requiredSkills": [
+        "Python",
+        "Machine Learning",
+        "SQL",
+        "Statistics",
+        "AWS"
+      ],
       "minGpa": 3.5,
       "breakdown": {
         "skillMatch": 88,
         "gpaMet": true,
         "authCompatible": true,
-        "matchedSkills": ["Python", "Machine Learning", "SQL"]
-      }
+        "matchedSkills": [
+          "Python",
+          "Machine Learning",
+          "SQL"
+        ]
+      },
+      "employmentType": "internship_unpaid",
+      "summary": "Join Amazon as a Applied Scientist Intern and help us build amazing products."
     }
   ]
 }

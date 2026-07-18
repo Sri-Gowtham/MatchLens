@@ -18,6 +18,8 @@ export interface MatchedListing {
   minGpa?: number;
   sponsorshipAvailable?: boolean;
   role?: string;
+  employmentType?: 'internship_stipend' | 'internship_unpaid' | 'full_time';
+  summary?: string;
 }
 
 export type WorkMode = 'remote' | 'onsite' | 'hybrid';
@@ -27,4 +29,5 @@ export interface ListingFilters {
   location?: string;
   workMode?: WorkMode | '';
   sponsorship?: boolean | null;
+  employmentType?: 'internship_stipend' | 'internship_unpaid' | 'full_time' | '';
 }

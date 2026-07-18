@@ -22,8 +22,8 @@ export const routes: Routes = [
     canActivate: [authGuard]
   },
   {
-    path: 'simulator',
-    loadComponent: () => import('./pages/simulator/simulator.component').then(m => m.SimulatorComponent),
+    path: 'insights',
+    loadComponent: () => import('./pages/insights/insights.component').then(m => m.InsightsComponent),
     canActivate: [authGuard]
   },
   { path: '**', redirectTo: '/feed' }

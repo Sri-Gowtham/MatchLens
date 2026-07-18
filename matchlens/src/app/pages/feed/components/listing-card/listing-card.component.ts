@@ -9,84 +9,108 @@ import { ScoreBadgeComponent } from '../../../../shared/score-badge/score-badge.
   imports: [CommonModule, ScoreBadgeComponent],
   template: `
     <article class="bg-surface border border-border rounded-2xl shadow-card hover:shadow-card-hover
-                    transition-all duration-300 overflow-hidden"
+                    transition-all duration-300 overflow-hidden w-full"
              [class.expanded]="expanded()">
 
       <!-- Card body -->
       <div class="p-5">
         <div class="flex items-start justify-between gap-4">
 
-          <!-- Company icon + title -->
-          <div class="flex items-start gap-3 min-w-0">
-            <div class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 font-serif font-bold text-sm text-white"
-                 [style.background]="companyColor">
-              {{ listing.company[0] }}
+          <!-- Left content container -->
+          <div class="flex-1 min-w-0">
+            <!-- Company icon + title + company name -->
+            <div class="flex items-center gap-3 mb-2">
+              <div class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 font-serif font-bold text-sm text-white"
+                   [style.background]="companyColor">
+                {{ listing.company[0] }}
+              </div>
+              <div class="min-w-0">
+                <h3 class="font-serif font-semibold text-primary text-base leading-tight truncate">
+                  {{ listing.title }}
+                </h3>
+                <p class="text-text-secondary text-sm font-sans mt-0.5">{{ listing.company }}</p>
+              </div>
             </div>
-            <div class="min-w-0">
-              <h3 class="font-serif font-semibold text-primary text-base leading-tight truncate">
-                {{ listing.title }}
-              </h3>
-              <p class="text-text-secondary text-sm font-sans mt-0.5">{{ listing.company }}</p>
+
+            <!-- Meta tags -->
+            <div class="flex flex-wrap items-center gap-2 mt-3">
+              <!-- Location -->
+              <span class="inline-flex items-center gap-1 text-xs text-text-secondary font-sans">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                </svg>
+                {{ listing.location }}
+              </span>
+              <span class="text-border">•</span>
+
+              <!-- Work Mode -->
+              <span class="inline-flex items-center gap-1 text-xs font-sans"
+                    [class]="workModeClass">
+                {{ workModeLabel }}
+              </span>
+
+              <!-- Employment Type -->
+              @if (listing.employmentType) {
+                <span class="text-border">•</span>
+                <span class="inline-flex items-center gap-1 text-xs font-sans text-primary bg-primary/10 px-2 py-0.5 rounded-full">
+                  {{ employmentTypeLabel }}
+                </span>
+              }
+
+              <!-- Sponsorship -->
+              @if (listing.sponsorshipAvailable) {
+                <span class="text-border">•</span>
+                <span class="inline-flex items-center gap-1 text-xs text-success font-sans">
+                  <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                  </svg>
+                  Sponsors visa
+                </span>
+              }
             </div>
+
+            <!-- Summary snippet -->
+            @if (listing.summary) {
+              <p class="mt-3 text-sm text-text-secondary font-sans line-clamp-1 truncate">
+                {{ listing.summary }}
+              </p>
+            }
+
+            <!-- Matched skills preview -->
+            @if (matchedSkills.length > 0) {
+              <div class="flex flex-wrap gap-1.5 mt-3">
+                @for (skill of matchedSkills.slice(0, 4); track skill) {
+                  <span class="text-xs bg-primary/6 text-primary border border-primary/12 px-2 py-0.5 rounded-full font-sans">
+                    {{ skill }}
+                  </span>
+                }
+                @if (matchedSkills.length > 4) {
+                  <span class="text-xs text-text-secondary font-sans">+{{ matchedSkills.length - 4 }} more</span>
+                }
+              </div>
+            }
+
+            <!-- Expand toggle -->
+            <button (click)="expanded.set(!expanded())"
+                    class="mt-4 flex items-center gap-1.5 text-xs font-sans text-primary/70 hover:text-primary transition-colors group">
+              <svg class="w-3.5 h-3.5 transition-transform duration-200"
+                   [class.rotate-180]="expanded()"
+                   fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+              <span class="font-medium text-accent">
+                {{ expanded() ? 'Hide breakdown' : 'Why this matched' }}
+              </span>
+            </button>
           </div>
 
-          <!-- Score badge -->
-          <div class="flex-shrink-0">
+          <!-- Score badge pinned top-right -->
+          <div class="flex-shrink-0 mt-1">
             <app-score-badge [score]="listing.score" size="md" />
           </div>
+
         </div>
-
-        <!-- Meta tags -->
-        <div class="flex flex-wrap items-center gap-2 mt-4">
-          <span class="inline-flex items-center gap-1 text-xs text-text-secondary font-sans">
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-            </svg>
-            {{ listing.location }}
-          </span>
-          <span class="text-border">•</span>
-          <span class="inline-flex items-center gap-1 text-xs font-sans"
-                [class]="workModeClass">
-            {{ workModeLabel }}
-          </span>
-          @if (listing.sponsorshipAvailable) {
-            <span class="text-border">•</span>
-            <span class="inline-flex items-center gap-1 text-xs text-success font-sans">
-              <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-              </svg>
-              Sponsors visa
-            </span>
-          }
-        </div>
-
-        <!-- Matched skills preview -->
-        @if (matchedSkills.length > 0) {
-          <div class="flex flex-wrap gap-1.5 mt-3">
-            @for (skill of matchedSkills.slice(0, 4); track skill) {
-              <span class="text-xs bg-primary/6 text-primary border border-primary/12 px-2 py-0.5 rounded-full font-sans">
-                {{ skill }}
-              </span>
-            }
-            @if (matchedSkills.length > 4) {
-              <span class="text-xs text-text-secondary font-sans">+{{ matchedSkills.length - 4 }} more</span>
-            }
-          </div>
-        }
-
-        <!-- Expand toggle -->
-        <button (click)="expanded.set(!expanded())"
-                class="mt-4 flex items-center gap-1.5 text-xs font-sans text-primary/70 hover:text-primary transition-colors group">
-          <svg class="w-3.5 h-3.5 transition-transform duration-200"
-               [class.rotate-180]="expanded()"
-               fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-          </svg>
-          <span class="font-medium text-accent">
-            {{ expanded() ? 'Hide breakdown' : 'Why this matched' }}
-          </span>
-        </button>
       </div>
 
       <!-- Expandable breakdown -->
@@ -206,6 +230,18 @@ export class ListingCardComponent {
       onsite: 'text-text-secondary'
     };
     return classes[this.listing.workMode] ?? 'text-text-secondary';
+  }
+
+  get employmentTypeLabel(): string {
+    const labels: Record<string, string> = {
+      internship_stipend: 'Internship (stipend)',
+      internship_unpaid: 'Internship (unpaid)',
+      full_time: 'Full-Time'
+    };
+    if (this.listing.employmentType) {
+      return labels[this.listing.employmentType] ?? this.listing.employmentType;
+    }
+    return '';
   }
 
   barColor(score: number): string {

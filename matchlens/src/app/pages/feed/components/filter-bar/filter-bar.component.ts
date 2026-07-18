@@ -11,7 +11,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs';
   imports: [ReactiveFormsModule, CommonModule],
   template: `
     <div class="bg-surface border border-border rounded-2xl shadow-card p-5 mb-6">
-      <div class="flex items-center justify-between mb-4">
+      <div class="mb-4">
         <h3 class="text-sm font-semibold text-primary font-sans flex items-center gap-2">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -19,18 +19,14 @@ import { debounceTime, distinctUntilChanged } from 'rxjs';
           </svg>
           Filter listings
         </h3>
-        <button type="button" (click)="reset()"
-                class="text-xs text-text-secondary hover:text-danger font-sans transition-colors">
-          Clear all
-        </button>
       </div>
 
-      <form [formGroup]="form" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+      <form [formGroup]="form" class="flex flex-col gap-5">
 
         <!-- Role search -->
         <div>
           <label for="filter-role" class="form-label text-xs">Role / keyword</label>
-          <div class="relative">
+          <div class="relative mt-1">
             <svg class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-text-secondary"
                  fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -44,7 +40,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs';
         <!-- Location -->
         <div>
           <label for="filter-location" class="form-label text-xs">Location</label>
-          <div class="relative">
+          <div class="relative mt-1">
             <svg class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-text-secondary"
                  fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -57,10 +53,37 @@ import { debounceTime, distinctUntilChanged } from 'rxjs';
           </div>
         </div>
 
+        <!-- Employment Type -->
+        <div>
+          <p class="form-label text-xs mb-2">Employment Type</p>
+          <div class="flex flex-col gap-2">
+            <label class="flex items-center gap-2 cursor-pointer group">
+              <input type="radio" formControlName="employmentType" value=""
+                     class="w-4 h-4 text-primary border-border focus:ring-primary/20 transition-colors">
+              <span class="text-sm font-sans text-text-secondary group-hover:text-primary transition-colors">Any</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer group">
+              <input type="radio" formControlName="employmentType" value="full_time"
+                     class="w-4 h-4 text-primary border-border focus:ring-primary/20 transition-colors">
+              <span class="text-sm font-sans text-text-secondary group-hover:text-primary transition-colors">Full-Time</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer group">
+              <input type="radio" formControlName="employmentType" value="internship_stipend"
+                     class="w-4 h-4 text-primary border-border focus:ring-primary/20 transition-colors">
+              <span class="text-sm font-sans text-text-secondary group-hover:text-primary transition-colors">Internship (stipend)</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer group">
+              <input type="radio" formControlName="employmentType" value="internship_unpaid"
+                     class="w-4 h-4 text-primary border-border focus:ring-primary/20 transition-colors">
+              <span class="text-sm font-sans text-text-secondary group-hover:text-primary transition-colors">Internship (unpaid)</span>
+            </label>
+          </div>
+        </div>
+
         <!-- Work Mode -->
         <div>
           <label for="filter-work-mode" class="form-label text-xs">Work mode</label>
-          <select id="filter-work-mode" formControlName="workMode" class="form-input text-sm">
+          <select id="filter-work-mode" formControlName="workMode" class="form-input text-sm mt-1">
             <option value="">All modes</option>
             <option value="remote">Remote</option>
             <option value="hybrid">Hybrid</option>
@@ -71,10 +94,10 @@ import { debounceTime, distinctUntilChanged } from 'rxjs';
         <!-- Sponsorship -->
         <div>
           <p class="form-label text-xs">Sponsorship</p>
-          <div class="flex gap-2 mt-1">
+          <div class="flex flex-col gap-2 mt-1">
             <button type="button"
                     (click)="form.patchValue({sponsorship: null})"
-                    class="flex-1 text-xs font-sans py-2 px-2 rounded-xl border transition-all"
+                    class="text-xs font-sans py-2 px-2 rounded-xl border transition-all text-center w-full"
                     [class.border-primary]="form.value.sponsorship === null"
                     [class.bg-primary]="form.value.sponsorship === null"
                     [class.text-white]="form.value.sponsorship === null"
@@ -84,27 +107,35 @@ import { debounceTime, distinctUntilChanged } from 'rxjs';
             </button>
             <button type="button"
                     (click)="form.patchValue({sponsorship: true})"
-                    class="flex-1 text-xs font-sans py-2 px-2 rounded-xl border transition-all"
+                    class="text-xs font-sans py-2 px-2 rounded-xl border transition-all text-center w-full"
                     [class.border-primary]="form.value.sponsorship === true"
                     [class.bg-primary]="form.value.sponsorship === true"
                     [class.text-white]="form.value.sponsorship === true"
                     [class.border-border]="form.value.sponsorship !== true"
                     [class.text-text-secondary]="form.value.sponsorship !== true">
-              Sponsors
+              Sponsors visa
             </button>
             <button type="button"
                     (click)="form.patchValue({sponsorship: false})"
-                    class="flex-1 text-xs font-sans py-2 px-1 rounded-xl border transition-all"
+                    class="text-xs font-sans py-2 px-1 rounded-xl border transition-all text-center w-full"
                     [class.border-primary]="form.value.sponsorship === false"
                     [class.bg-primary]="form.value.sponsorship === false"
                     [class.text-white]="form.value.sponsorship === false"
                     [class.border-border]="form.value.sponsorship !== false"
                     [class.text-text-secondary]="form.value.sponsorship !== false">
-              No visa
+              No visa needed
             </button>
           </div>
         </div>
+
       </form>
+      
+      <div class="mt-6 pt-4 border-t border-border flex justify-center">
+        <button type="button" (click)="reset()"
+                class="text-xs text-text-secondary hover:text-danger font-sans transition-colors underline underline-offset-2">
+          Clear all filters
+        </button>
+      </div>
     </div>
   `
 })
@@ -119,7 +150,8 @@ export class FilterBarComponent implements OnInit {
     role: [''],
     location: [''],
     workMode: ['' as WorkMode | ''],
-    sponsorship: [null as boolean | null]
+    sponsorship: [null as boolean | null],
+    employmentType: ['' as 'internship_stipend' | 'internship_unpaid' | 'full_time' | '']
   });
 
   ngOnInit() {
@@ -128,6 +160,10 @@ export class FilterBarComponent implements OnInit {
     if (qp['role']) this.form.patchValue({ role: qp['role'] });
     if (qp['location']) this.form.patchValue({ location: qp['location'] });
     if (qp['workMode']) this.form.patchValue({ workMode: qp['workMode'] });
+    if (qp['employmentType']) this.form.patchValue({ employmentType: qp['employmentType'] });
+    if (qp['sponsorship']) {
+       this.form.patchValue({ sponsorship: qp['sponsorship'] === 'true' });
+    }
 
     this.form.valueChanges.pipe(debounceTime(300), distinctUntilChanged()).subscribe(v => {
       this.emitAndUpdateUrl(v);
@@ -142,7 +178,8 @@ export class FilterBarComponent implements OnInit {
       role: v.role || undefined,
       location: v.location || undefined,
       workMode: v.workMode || undefined,
-      sponsorship: v.sponsorship
+      sponsorship: v.sponsorship,
+      employmentType: v.employmentType || undefined
     };
 
     // Update query params
@@ -150,12 +187,15 @@ export class FilterBarComponent implements OnInit {
     if (filters.role) queryParams['role'] = filters.role;
     if (filters.location) queryParams['location'] = filters.location;
     if (filters.workMode) queryParams['workMode'] = filters.workMode;
+    if (filters.employmentType) queryParams['employmentType'] = filters.employmentType;
+    if (filters.sponsorship !== null && filters.sponsorship !== undefined) queryParams['sponsorship'] = filters.sponsorship;
+    
     this.router.navigate([], { queryParams, replaceUrl: true });
 
     this.filtersChanged.emit(filters);
   }
 
   reset() {
-    this.form.reset({ role: '', location: '', workMode: '', sponsorship: null });
+    this.form.reset({ role: '', location: '', workMode: '', sponsorship: null, employmentType: '' });
   }
 }
